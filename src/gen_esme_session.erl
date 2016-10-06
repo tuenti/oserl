@@ -582,9 +582,7 @@ handle_peer_operation({CmdId, Pdu}, St) ->
         noreply ->
             ok = smpp_req_tab:write(St#st.op_tab, {SeqNum, CmdId}),
             true;
-        {ok, PList1} ->
-            PList2  = [{congestion_state, St#st.congestion_state}],
-            Params = smpp_operation:merge(PList1, PList2),
+        {ok, Params} ->
             send_response(RespId, ?ESME_ROK, SeqNum, Params, Sock, Log),
             true;
         {error, Error} ->
