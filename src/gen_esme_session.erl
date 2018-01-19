@@ -451,10 +451,6 @@ handle_event({input, CmdId, Pdu, _Lapse, _Timestamp}, Stn, Std)
                     {next_state, Stn, Std}
             end;
         {error, not_found} ->
-            Sock = Std#st.sock,
-            Log = Std#st.log,
-            Nack = ?COMMAND_ID_GENERIC_NACK,
-            send_response(Nack, ?ESME_RINVCMDID, SeqNum, [], Sock, Log),
             {next_state, Stn, Std}
     end;
 handle_event({input, CmdId, Pdu, _Lapse, _Timestamp}, Stn, Std)
